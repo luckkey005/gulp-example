@@ -1,0 +1,250 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SynTrack - PMIS Login</title>
+    <link rel="icon" type="image/png" sizes="96x96" href="/pmis/resources/images/favicon.png">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="css/materialize-v.1.0.min.css">
+    <link rel="stylesheet" href="css/style.css"> -->
+
+    <link rel="stylesheet" href="../dist/css/materialize-v.1.0.min.css">
+    <link rel="stylesheet" href="../dist/css/style.css">
+
+    <style type="text/css">
+        /* Change the white to any color ;) */
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover,
+        input:-webkit-autofill:focus,
+        input:-webkit-autofill:active {
+            -webkit-box-shadow: 0 0 0 30px rgba(2, 36, 202, 0.70) inset !important;
+        }
+    </style>
+</head>
+
+<body style="background: black url(imgs/login-background.jpg) no-repeat center center;background-size: cover;">
+    <!-- header starts -->
+    <nav>
+        <div class="nav-wrapper bg">
+            <h3 style="margin:0" class="text">Welcome to MRVC PMIS </h3>
+        </div>
+    </nav>
+    <!-- header ends -->
+    <!-- side navigation starts here -->
+    <ul id="slide-out" class="sidenav">
+        <li></li>
+        <li><span>Login card Position</span></li>
+        <li>
+            <p>
+                <label>
+                    <input class="with-gap" name="group1" type="radio" value="left">
+                    <span>Left</span>
+                </label>
+            </p>
+            <p>
+                <label>
+                    <input class="with-gap" name="group1" type="radio" value="middle">
+                    <span>Middle</span>
+                </label>
+            </p>
+            <p>
+                <label>
+                    <input class="with-gap" name="group1" type="radio" value="right">
+                    <span>Right</span>
+                </label>
+            </p>
+        </li>
+        <li>
+            <div class="divider"></div>
+        </li>
+        <li><span>Background Image</span></li>
+        <li>
+            <!-- Modal Trigger -->
+            <a class="waves-effect waves-light btn bgb modal-trigger" href="#modal1">Image</a>
+
+        </li>
+    </ul>
+    <!-- side navigation ends here -->
+
+    <a data-target="slide-out" class="sidenav-trigger setting-icon"><i class="material-icons">settings</i></a>
+
+    <div class="container">
+        <!-- Modal Opens to select bg image -->
+        <div id="modal1" class="modal" tabindex="0">
+            <div class="modal-content">
+                <h4 class="center-align">Background Image</h4>
+                <div class="divider"></div>
+                <form action="/pmis/changeLoginBackground" id="imageForm" name="imageForm" method="post"
+                    enctype="multipart/form-data">
+                    <div class="file-field input-field">
+                        <div class="btn bgg">
+                            <span>Image</span>
+                            <input type="file" name="fileName" id="fileName" accept="image/jpeg" required="">
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate bgb" type="text">
+                        </div>
+                    </div>
+                    <input type="submit" class="btn bgb" value="Submit" style="width:100%">
+                </form>
+            </div>
+        </div>
+
+        <div class="row mar-top">
+            <div id="support" class="col"></div>
+            <form class="col s12 m3 " action="/pmis/login" id="loginForm" name="loginForm" method="post"
+                novalidate="novalidate">
+                <div class="row homepage">
+                    <img src="imgs/mrvclogo.png" alt="mrvc logo" class="card-img">
+                    <h4 class="tite">Sign In</h4>
+                    <div class="input-field col offset-s1 s10">
+                        <input type="text" name="user_id" id="user_id" class="validate form-control valid"
+                            autocomplete="off" aria-invalid="false">
+                        <label for="user_id" class="active">User Name</label>
+                    </div>
+                    <div class="input-field col offset-s1 s10">
+                        <input type="password" name="password" id="password" class="validate valid" autocomplete="off"
+                            aria-invalid="false">
+                        <label for="password" class="active">Password</label>
+                    </div>
+                    <div class="msg">
+                        <p id="message" class="error"></p>
+
+                        <p id="logoutMsg" class="success" style="display: none;">Successfully logged out</p>
+
+                    </div>
+                    <div class="input-field col offset-s1 s10 text-center">
+                        <button type="submit" class="btn bgb" style="width:100%">Submit</button>
+                        <!--  <input type="submit" class="btn-outline waves-effect waves-light" value="Go">
+			                <p class="for-text"><a href="javscript:void(0);" >Forgot Password ?</a></p> -->
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <!-- footer starts here -->
+
+    <footer class="page-footer">
+        <div class="container">
+            <p class="footer-text">Copyright <span id="year">2020</span> @ mrvc.indianrailways.gov.in | Designed &amp;
+                Developed by
+                <img src="imgs/synergiz.png" alt="synergiz logo" class="footer-logo"></p>
+        </div>
+    </footer>
+    <!-- footer ends here -->
+    <script src="js/jQuery-v.3.5.min.js"></script>
+    <script src="js/jquery-validation-1.19.1.min.js"></script>
+    <script src="js/materialize-v.1.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            if (navigator.userAgent.toLowerCase().indexOf("chrome") >= 0) {
+                $('#user_id').on('change focus active click', function (e) {
+                    setTimeout(function () {
+                        $.each(
+                            document.querySelectorAll('*:-webkit-autofill'),
+                            function () {
+                                var clone = $(this).clone(true, true);
+                                $(this).after(clone).remove();
+                            })
+                    }, 100)
+                }).change();
+            }
+        });
+
+        //form validations and footer related code
+        $(document).ready(function () {
+            $('#logoutMsg').delay(3000).fadeOut('slow');
+
+            $("#year").html(new Date().getFullYear());
+            $('#loginForm').validate({
+                rules: {
+                    "user_id": {
+                        required: true
+                    }, "password": {
+                        required: true
+                    }
+                },
+                messages: {
+                    "user_id": {
+                        required: 'Please Provide Login Id & Password'
+                    }, "password": {
+                        required: 'Please Provide Login Id & Password'
+                    }
+                }, errorPlacement: function (error, element) {
+                    $("#logoutMsg").html("");
+                    if (element.attr("id") == "user_id") {
+                        document.getElementById("message").innerHTML = "";
+                        error.appendTo('#message');
+                    } else if (element.attr("id") == "password") {
+                        document.getElementById("message").innerHTML = "";
+                        error.appendTo('#message');
+                    } else { error.insertAfter(element); }
+
+                }, invalidHandler: function (form, validator) {
+                    var errors = validator.numberOfInvalids();
+                    if (errors) {
+                        var position = validator.errorList[0].element;
+                        jQuery('html, body').animate({
+                            scrollTop: jQuery(validator.errorList[0].element).offset().top - 100
+                        }, 1000);
+                    }
+                }, submitHandler: function (form) {
+
+                    //const public_key="ssdkF$HUy2A#D%kd";
+                    //$('#user_id').val(CryptoJS.AES.encrypt($('#user_id').val(),public_key));
+                    //$('#password').val(CryptoJS.AES.encrypt($('#password').val(),public_key));
+
+                    //another method
+
+                    //var encdata = $("form").serializeArray();
+
+                    //$.each(encdata, function(i, field){
+                    //if(jQuery('input[name="'+field.name+'"]').val()!="")
+                    //jQuery('input[name="'+field.name+'"]').val(CryptoJS.AES.encrypt(jQuery('input[name="'+field.name+'"]').val(),public_key));
+                    //});
+
+                    form.submit();
+                }
+            });
+
+            $('input').change(function () {
+                if ($(this).val() != "") {
+                    $(this).valid();
+                }
+            });
+
+        });
+        //material components initialization
+        $(document).ready(function () {
+            $('.sidenav').sidenav();
+            $('.modal').modal();
+        });
+        //selecting the login card position
+        $('input[type=radio][name=group1]').change(function () {
+            if (this.value == 'middle') {
+                $('#support').addClass('m5')
+                $('#support').removeClass('m9')
+            }
+            if (this.value == 'right') {
+                $('#support').addClass('m9')
+                $('#support').removeClass('m5')
+
+            }
+            if (this.value == 'left') {
+                $('#support').removeClass('m9')
+                $('#support').removeClass('m5')
+            }
+        });
+
+
+    </script>
+
+
+
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+</body>
+
+</html>

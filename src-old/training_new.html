@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add / Edit Training</title>
+    <link rel="stylesheet" href="../nginx-1.9.9/html/pmis/resources/css/materialize-v.1.0.min.css">
+    <link rel="stylesheet" href="../nginx-1.9.9/html/pmis/resources/css/material-design-lite-v.1.0.css">
+    <link rel="stylesheet" href="../nginx-1.9.9/html/pmis/resources/css/font-awesome-v.4.7.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
+    <link rel="stylesheet" href="../nginx-1.9.9/html/pmis/resources/css/header-footer.css">
+    <link rel="stylesheet" href="../nginx-1.9.9/html/pmis/resources/css/datatable-material.css">
+    <link rel="stylesheet" href="../nginx-1.9.9/html/pmis/resources/css/training.css">
+    <link rel="stylesheet" href="../nginx-1.9.9/html/pmis/resources/css/light-theme.css">
+    <link rel="stylesheet" href="../nginx-1.9.9/html/pmis/resources/css/select2.min.css">
+    <link rel="stylesheet" href="../nginx-1.9.9/html/pmis/resources/css/searchable-dropdown.css">
+    <style>
+        #session-table .datepicker~button {
+            top: 26px;
+        }
+
+        #session-table input[type="text"]::-webkit-input-placeholder,
+        #session-table input[type="text"]:-ms-input-placeholder,
+        #session-table input[type="text"]::placeholder {
+            /* Edge */
+            color: #777;
+        }
+
+        .datepicker-table thead tr,
+        .datepicker-table thead tr:hover,
+        .datepicker-table tbody tr,
+        .datepicker-table tbody tr:hover {
+            background-color: transparent;
+            border-radius: 0;
+            border-bottom-width: 0;
+        }
+
+        .datepicker-table td:first-of-type,
+        .datepicker-table td:last-of-type {
+            padding: 0 !important;
+        }
+
+
+        .datepicker-table th,
+        .datepicker-table td {
+            padding: 0;
+        }
+
+        .radiogroup {
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .fixed-width {
+            width: 100%;
+        }
+
+        .fixed-width .table-inside {
+            width: 100%;
+            overflow: auto;
+        }
+
+        /* font size increase  */
+        .input-field .searchable_label {
+            font-size: 0.9rem;
+        }
+
+        /* change radio colors  */
+        [type="radio"]:checked+span::after,
+        [type="radio"].with-gap:checked+span::after {
+            background-color: #282130 !important;
+        }
+
+        [type="radio"]:checked+span::after,
+        [type="radio"].with-gap:checked+span::before,
+        [type="radio"].with-gap:checked+span::after {
+            border: 2px solid #282130 !important;
+        }
+
+        .timepicker~button {
+            position: absolute;
+            right: 15px;
+            top: 25px;
+            border: 0;
+            opacity: 0.7;
+            cursor: pointer;
+            background-color: transparent;
+        }
+
+        .timepicker~button .fa {
+            font-size: 1.3rem;
+            color: #333;
+        }
+
+        /* modal header styling  */
+        .modal-header {
+            text-align: center;
+            background-color: #282130;
+            color: #fff;
+            margin: -24px -24px 20px !important;
+            padding: 1rem;
+        }
+
+        .table-inside tbody td p {
+            margin-bottom: 0;
+            margin-top: 10px;
+        }
+
+        input[type="checkbox"]+label:before {
+            border: 2px solid indigo;
+            background: transparent;
+        }
+
+        input[type="checkbox"]:checked+label:before {
+            border: 2px solid transparent;
+            border-bottom: 2px solid indigo;
+            border-right: 2px solid indigo;
+            background: transparent;
+        }
+
+        .materialize-textarea::placeholder {
+            color: #777;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- header  starts-->
+    <!-- header ends  -->
+
+    <!-- card  -->
+    <div class="row">
+        <div class="col s12 m12">
+            <div class="card ">
+                <div class="card-content">
+                    <div class="center-align">
+                        <span class="card-title headbg">
+                            <div class="center-align p-2 bg-m">
+                                <h6>Add / Edit Training</h6>
+                            </div>
+                        </span>
+                    </div>
+                    <!-- form start-->
+                    <div class="container container-no-margin">
+                        <form action="#">
+                            <div class="row">
+                                <div class="col m2 hide-on-small-only"></div>
+                                <div class="col s12 m4 input-field">
+                                    <label class="primary-text-bold">Training ID :</label>
+                                </div>
+                                <div class="col s12 m4 input-field">
+                                    <p class="searchable_label">Training Type</p>
+                                    <select class="searchable">
+                                        <option value="0" selected>Select</option>
+                                        <option value="1">Agency 1</option>
+                                        <option value="2">Agency 2</option>
+                                        <option value="3">Agency 3</option>
+                                    </select>
+                                </div>
+                                <div class="col m2 hide-on-small-only"></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col m2 hide-on-small-only"></div>
+                                <div class="col s12 m4 input-field">
+                                    <p class="searchable_label">Category</p>
+                                    <select class="searchable">
+                                        <option value="0" selected>Select</option>
+                                        <option value="1">Agency 1</option>
+                                        <option value="2">Agency 2</option>
+                                        <option value="3">Agency 3</option>
+                                    </select>
+                                </div>
+                                <div class="col s12 m4 input-field">
+                                    <p class="searchable_label">Status </p>
+                                    <select class="searchable">
+                                        <option value="0" selected>Select</option>
+                                        <option value="1">Agency 1</option>
+                                        <option value="2">Agency 2</option>
+                                        <option value="3">Agency 3</option>
+                                    </select>
+                                </div>
+                                <div class="col m2 hide-on-small-only"></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col m2 hide-on-small-only"></div>
+                                <div class="col s12 m4 input-field ">
+                                    <input id="faculty_name" type="text" class="validate">
+                                    <label for="faculty_name">Faculty</label>
+                                </div>
+                                <div class="col s12 m4 input-field ">
+                                    <input id="designation" type="text" class="validate">
+                                    <label for="designation">Designation</label>
+                                </div>
+                                <div class="col m2 hide-on-small-only"></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col m2 hide-on-small-only"></div>
+                                <div class="col s12 m8 input-field">
+                                    <textarea id="training_title" class="materialize-textarea"></textarea>
+                                    <label for="training_title">Title</label>
+                                </div>
+                                <div class="col m2 hide-on-small-only"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col m2 hide-on-small-only"></div>
+                                <div class="col s12 m8 input-field">
+                                    <textarea id="training_description" class="materialize-textarea"></textarea>
+                                    <label for="training_description">Description</label>
+                                </div>
+                                <div class="col m2 hide-on-small-only"></div>
+                            </div>
+                            <!-- <div class="row">
+                                <div class="col m2 hide-on-small-only"></div>
+                                <div class="col s12 m8 input-field">
+                                    <div class="row">
+                                        <div class="col s12 m4 input-field">
+                                            <input id="start_date" type="text" class="validate datepicker">
+                                            <label for="start_date">Start Date</label>
+                                            <button type="button" id="start_date_icon"><i
+                                                    class="fa fa-calendar"></i></button>
+                                        </div>
+                                        <div class="col s12 m4 input-field">
+                                            <input id="end_date" type="text" class="validate datepicker">
+                                            <label for="end_date">End Date</label>
+                                            <button type="button" id="end_date_icon"><i
+                                                    class="fa fa-calendar"></i></button>
+                                        </div>
+                                        <div class="col s12 m4 input-field">
+                                            <input id="hours" type="text" class="validate">
+                                            <label for="hours"> Hours</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+                            <div class="row">
+                                <div class="col m2 hide-on-small-only"></div>
+                                <div class="col s12 m8 input-field">
+                                    <!-- <input id="training_center" type="text" class="validate" style="margin-top: 10px;">
+                                    <label for="training_center"> Training Center </label> -->
+                                    <textarea id="training_center" class="materialize-textarea"></textarea>
+                                    <label for="training_center">Training Center</label>
+                                </div>
+                                <div class="col m2 hide-on-small-only"></div>
+                            </div>
+
+                            <!-- <div class="row">
+                                <div class="col m2 hide-on-small-only"></div>
+                                <div class="col s12 m8">
+                                    <div class="row fixed-width">
+                                        <h5 class="center-align">Batches</h5>
+                                        <div class="table-inside">
+                                            <table id="batches-table" class="mdl-data-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Batch No</th>
+                                                        <th>Attendees</th>
+                                                        <th>Remaks</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <input id="batch_no" type="text" class="validate"
+                                                                placeholder="Batch No">
+                                                        </td>
+                                                        <td>
+                                                            <a href="#batches-update-modal"
+                                                                class="btn waves-effect waves-light bg-m t-c modal-trigger">
+                                                                Update </a>
+                                                        </td>
+                                                        <td>
+                                                            <textarea id="remarks" class="materialize-textarea"
+                                                                placeholder="Remarks"></textarea>
+                                                        </td>
+                                                        <td>
+                                                            <a href="#" class="btn waves-effect waves-light red t-c ">
+                                                                <i class="fa fa-close"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="last-row">
+                                                        <td></td>
+
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td>
+                                                            <a href="#" class="btn waves-effect waves-light bg-m t-c"
+                                                                onclick="addBatchRow()"> <i class="fa fa-plus"></i></a>
+                                                        </td>
+
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col m2 hide-on-small-only"></div>
+                            </div> -->
+
+
+                            <div class="row fixed-width">
+                                <h5 class="center-align">Sessions</h5>
+                                <div class="table-inside">
+                                    <table id="session-table" class="mdl-data-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Session No</th>
+                                                <th>Start Time</th>
+                                                <th>End Time</th>
+                                                <th>Attendees</th>
+                                                <th>Remaks</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <input id="session_no" type="text" class="validate"
+                                                        placeholder="Session No">
+                                                </td>
+                                                <td>
+                                                    <input id="start_time" type="text" class="validate timepicker"
+                                                        placeholder="Start Time">
+                                                    <button type="button" id="start_time_icon"><i
+                                                            class="fa fa-clock-o"></i></button>
+                                                </td>
+                                                <td>
+                                                    <input id="end_time" type="text" class="validate timepicker"
+                                                        placeholder="End Time">
+                                                    <button type="button" id="start_time_icon"><i
+                                                            class="fa fa-clock-o"></i></button>
+                                                </td>
+                                                <td>
+                                                    <a href="#session-update-modal"
+                                                        class="btn waves-effect waves-light bg-m t-c modal-trigger">
+                                                        Update </a>
+                                                </td>
+                                                <td>
+                                                    <textarea id="remarks" class="materialize-textarea"
+                                                        placeholder="Remarks"></textarea>
+                                                </td>
+                                                <td>
+                                                    <a href="#" class="btn waves-effect waves-light red t-c "> <i
+                                                            class="fa fa-close"></i></a>
+                                                </td>
+                                            </tr>
+                                            <tr class="last-row">
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>
+                                                    <a href="#" class="btn waves-effect waves-light bg-m t-c"
+                                                        onclick="addSessionRow()"> <i class="fa fa-plus"></i></a>
+                                                </td>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+
+                            <!-- <div class="row">
+                                <div class="col m2 hide-on-small-only"></div>
+                                <div class="col m8 s12">
+                                    <div class="file-field input-field">
+                                        <div class="btn bg-m">
+                                            <span>Attachment</span>
+                                            <input type="file">
+                                        </div>
+                                        <div class="file-path-wrapper">
+                                            <input class="file-path validate" type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col m2 hide-on-small-only"></div>
+                            </div> -->
+
+                            <div class="row" style="margin-top: 20px;">
+                                <div class="col m2 hide-on-small-only"></div>
+                                <div class="col m8 s12">
+                                    <div class="row">
+                                        <div class="col s6 m6 input-field">
+                                            <p style="margin-top: 18px;">Any Issue ?</p>
+                                        </div>
+                                        <div class="col s6 m6 input-field">
+                                            <p class="radiogroup" style="padding-bottom: 10px;padding-top: 10px;">
+                                                <label>
+                                                    <input class="with-gap" name="issue" type="radio" value="yes" />
+                                                    <span>Yes</span>
+                                                </label> &nbsp; <label>
+                                                    <input class="with-gap" name="issue" type="radio" value="no" />
+                                                    <span>No</span>
+                                                </label>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="issue_yes" style="display: none;">
+                                <div class="row">
+                                    <h6 class="center-align" style="color:#282130;font-weight:600">Issue Details </h6>
+                                    <div class="col m2 hide-on-small-only"></div>
+                                    <div class="col m8 s12">
+                                        <div class="row">
+                                            <div class="col s12 m6 input-field" style="margin-top: 35px;">
+                                                <p class="searchable_label">Issue Category</p>
+                                                <select class="searchable">
+                                                    <option value="0" selected>Select</option>
+                                                    <option value="1">Category 1</option>
+                                                    <option value="2">Category 2</option>
+                                                    <option value="3">Category 3</option>
+                                                </select>
+                                            </div>
+                                            <div class="col s12 m6 input-field" style="padding-top: 4px;">
+                                                <p class="prio">Priority</p>
+                                                <p class="radiogroup">
+                                                    <label>
+                                                        <input class="with-gap" name="priority" type="radio"
+                                                            value="low" />
+                                                        <span>Low</span>
+                                                    </label>
+                                                    &nbsp;
+                                                    <label>
+                                                        <input class="with-gap" name="priority" type="radio"
+                                                            value="medium" />
+                                                        <span>Medium</span>
+                                                    </label>
+                                                    &nbsp;
+                                                    <label>
+                                                        <input class="with-gap" name="priority" type="radio"
+                                                            value="high" />
+                                                        <span>High</span>
+                                                    </label>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col m2 hide-on-small-only"></div>
+                                    <div class="col s12 m8 input-field">
+                                        <textarea id="issueDesc" class="materialize-textarea"
+                                            data-length="500"></textarea>
+                                        <label for="issueDesc">Issue Description</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <!-- row 10 -->
+                                <div class="col m2 hide-on-small-only"></div>
+                                <div class="col s12 m8 input-field">
+                                    <textarea id="textarea1" class="materialize-textarea" data-length="1000"></textarea>
+                                    <label for="textarea1">Remarks</label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col m2 hide-on-small-only"></div>
+                                <div class="col s12 m4">
+                                    <div class="center-align m-1">
+                                        <button style="width: 100%;" class="btn waves-effect waves-light bg-m">Add /
+                                            Edit</button>
+                                    </div>
+                                </div>
+                                <div class="col s12 m4">
+                                    <div class="center-align m-1">
+                                        <button class="btn waves-effect waves-light bg-s"
+                                            style="width:100%">Cancel</button>
+                                    </div>
+                                </div>
+                                <div class="col m2 hide-on-small-only"></div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- form ends  -->
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Structure -->
+    <div id="session-update-modal" class="modal">
+        <div class="modal-content">
+            <h4 class="modal-header">Trainee Updation Details</h4>
+
+            <!-- <div class="row">
+                <div class="col m3 hide-on-small-only"></div>
+                <div class="col s12 m6 input-field">
+                    <p class="searchable_label" style="margin-bottom: 0;">Batches</p>
+                    <select multiple>
+                        <option value="0" selected>Select</option>
+                        <option value="1">Batch 1</option>
+                        <option value="2">Batch 2</option>
+                        <option value="3">Batch 3</option>
+                    </select>
+                </div>
+            </div> -->
+
+            <div class="row fixed-width">
+                <div class="table-inside">
+                    <table id="training-update-table" class="mdl-data-table">
+                        <thead>
+                            <tr>
+                                <th>Department</th>
+                                <th>Attendee</th>
+                                <th>Mobile</th>
+                                <th>Required</th>
+                                <th>Participated</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <select id="department0">
+                                        <option selected>Department</option>
+                                        <option value="1">Department 1</option>
+                                        <option value="2">Department 2</option>
+                                        <option value="3">Department 3</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input id="attendee0" type="text" class="validate" placeholder="Attendee">
+                                </td>
+                                <td>
+                                    <input id="mobile0" type="number" class="validate" placeholder="Mobile">
+                                </td>
+                                <td>
+                                    <p>
+                                        <label>
+                                            <input type="checkbox" id="required0" />
+                                            <span></span>
+                                        </label>
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        <label>
+                                            <input type="checkbox" id="participated0" />
+                                            <span></span>
+                                        </label>
+                                    </p>
+                                </td>
+                                <td>
+                                    <a href="#" class="btn waves-effect waves-light red t-c "> <i
+                                            class="fa fa-close"></i></a>
+                                </td>
+                            </tr>
+                            <tr class="last-row">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <a onclick="addTrainingUpdateRow()" class="btn waves-effect waves-light bg-m t-c ">
+                                        <i class="fa fa-plus"></i></a>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div id="batches-update-modal" class="modal">
+        <div class="modal-content">
+            <h4 class="modal-header">Batches Updation Details</h4>
+
+            <div class="row fixed-width">
+                <div class="table-inside">
+                    <table id="batches-update-table" class="mdl-data-table">
+                        <thead>
+                            <tr>
+                                <th>Department</th>
+                                <th>Attendee</th>
+                                <th>Mobile</th>
+                                <th>Required</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <select id="department0">
+                                        <option selected>Department</option>
+                                        <option value="1">Department 1</option>
+                                        <option value="2">Department 2</option>
+                                        <option value="3">Department 3</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input id="attendee0" type="text" class="validate" placeholder="Attendee">
+                                </td>
+                                <td>
+                                    <input id="mobile0" type="number" class="validate" placeholder="Mobile">
+                                </td>
+                                <td>
+                                    <p>
+                                        <label>
+                                            <input type="checkbox" id="required0" />
+                                            <span></span>
+                                        </label>
+                                    </p>
+                                </td>
+                                <td>
+                                    <a href="#" class="btn waves-effect waves-light red t-c "> <i
+                                            class="fa fa-close"></i></a>
+                                </td>
+                            </tr>
+                            <tr class="last-row">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <a onclick="addBatchesUpdateRow()" class="btn waves-effect waves-light bg-m t-c ">
+                                        <i class="fa fa-plus"></i></a>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- footer  -->
+
+
+    <script src="../nginx-1.9.9/html/pmis/resources/js/jQuery-v.3.5.min.js"></script>
+    <script src="../nginx-1.9.9/html/pmis/resources/js/materialize-v.1.0.min.js"></script>
+    <script src="../nginx-1.9.9/html/pmis/resources/js/jquery.dataTables-v.1.10.min.js"></script>
+    <script src="../nginx-1.9.9/html/pmis/resources/js/dataTables.material.min.js"></script>
+    <script src="../nginx-1.9.9/html/pmis/resources/js/select2.min.js"></script>
+    <script src="../nginx-1.9.9/html/pmis/resources/js/datetimepicker.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('select:not(.searchable)').formSelect();
+            $('.searchable').select2();
+            $('.modal').modal();
+            $('#textarea1,#textarea2,#textarea3').characterCounter();
+            MaterialDateTimePicker.create($("#start_time"));
+            MaterialDateTimePicker.create($("#end_time"));
+
+            // $("#start_date,#end_date").datepicker();
+
+            // $('#start_date_icon').click(function () {
+            //     event.stopPropagation();
+            //     $('#start_date').click();
+            // });
+            // $('#end_date_icon').click(function () {
+            //     event.stopPropagation();
+            //     $('#end_date').click();
+            // });
+
+            $('#start_time_icon').click(function () {
+                // event.stopPropagation();
+                // $('#star_time').click();
+                MaterialDateTimePicker.create($("#start_time"));
+            });
+            $('#end_time_icon').click(function () {
+                // event.stopPropagation();
+                // $('#end_time').click();
+                MaterialDateTimePicker.create($("#end_time"));
+            });
+            $('input[name=issue]').change(function () {
+                var radioval = $('input[name=issue]:checked').val();
+                if (radioval == 'yes') {
+                    $('#issue_yes').css("display", "block");
+                }
+                else if (radioval == 'no') {
+                    $('#issue_yes').css("display", "none");
+                }
+            });
+
+        });
+        var trainno = 1;
+        function addTrainingUpdateRow() {
+            var text = '<tr>' +
+                '<td><select id="department' + trainno + '"><option selected>Department</option><option value="1">Department 1</option><option value="2">Department 2' +
+                '</option></select> </td>' + '<td><input id="attendee' + trainno + '" type="text" class="validate" placeholder="Attendee"></td>' +
+                '<td><input id="mobile' + trainno + '" type="number" class="validate" placeholder="Mobile"> </td>' +
+                '<td><p><label><input type="checkbox" id="required' + trainno + '"/><span></span></label></p></td>' +
+                '<td><p><label><input type="checkbox" id="participated' + trainno + '"/><span></span></label></p></td>' +
+                '<td><a href="#" class="btn waves-effect waves-light red t-c "> <i class="fa fa-close"></i></a></td>' + '</tr>';
+            $('#training-update-table').find('tr:last').prev().after(text);
+            $('#department' + trainno).formSelect();
+            trainno++;
+        }
+        var batchno = 1;
+        function addBatchesUpdateRow() {
+            var text = '<tr>' +
+                '<td><select id="department' + batchno + '"><option selected>Department</option><option value="1">Department 1</option><option value="2">Department 2' +
+                '</option></select> </td>' + '<td><input id="attendee' + batchno + '" type="text" class="validate" placeholder="Attendee"></td>' +
+                '<td><input id="mobile' + batchno + '" type="number" class="validate" placeholder="Mobile"> </td>' +
+                '<td><p><label><input type="checkbox" id="required' + batchno + '"/><span></span></label></p></td>' +
+                '<td><a href="#" class="btn waves-effect waves-light red t-c "> <i class="fa fa-close"></i></a></td>' + '</tr>';
+            $('#batches-update-table').find('tr:last').prev().after(text);
+            $('#department' + batchno).formSelect();
+            batchno++;
+        }
+        var sessionno = 1;
+        function addSessionRow() {
+            var text = '<tr>' +
+                '<td> <input id="session_no' + sessionno + '" type="text" class="validate" placeholder="Session No"> </td>' +
+                '<td> <input id="start_time' + sessionno + '" type="text" class="validate timepicker"  placeholder="Start Time">' +
+                '<button type="button" id="start_time' + sessionno + '_icon"><i class="fa fa-clock-o"></i></button> </td>' +
+                '<td> <input id="end_time' + sessionno + '" type="text" class="validate timepicker"placeholder="End Time">' +
+                '<button type="button" id="start_time' + sessionno + '_icon"><i class="fa fa-clock-o"></i></button></td>' +
+                '<td>  <a href="#session-update-modal" class="btn waves-effect waves-light bg-m t-c modal-trigger"> Update </a> </td>' +
+                '<td> <textarea id="remarks" class="materialize-textarea" placeholder="Remarks"></textarea> </td>' +
+                '<td> <a href="#" class="btn waves-effect waves-light red t-c "> <i class="fa fa-close"></i></a> </td>' + ' </tr>';
+            $('#session-table').find('tr:last').prev().after(text);
+            MaterialDateTimePicker.create($("#start_time" + sessionno));
+            MaterialDateTimePicker.create($("#end_time" + sessionno));
+
+            $('#start_time' + sessionno + '_icon').click(function () {
+                MaterialDateTimePicker.create($("#start_time" + sessionno));
+            });
+            $('#end_time' + sessionno + '_icon').click(function () {
+                MaterialDateTimePicker.create($("#end_time" + sessionno));
+            });
+        }
+        var batchrowno = 1;
+        function addBatchRow() {
+            var text = '<tr> <td><input id="batch_no' + batchrowno + '" type="text" class="validate" placeholder="Batch No"> </td>' +
+                '<td><a href="#batches-update-modal" class="btn waves-effect waves-light bg-m t-c modal-trigger"> Update </a> </td>' +
+                '<td><textarea id="remarks' + batchrowno + '" class="materialize-textarea" placeholder="Remarks"></textarea> </td>' +
+                '<td><a href="#" class="btn waves-effect waves-light red t-c "> <i class="fa fa-close"></i></a> </td>' + '</tr>';
+            $('#batches-table').find('tr:last').prev().after(text);
+        }
+    </script>
+
+
+</body>
+
+</html>
